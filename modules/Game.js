@@ -27,7 +27,7 @@ class Game {
     }
 
     isGameDone() {
-        return (this.#index >= this.#countries.length);
+        return (this.#index >= this.#countries.length - 1);
     }
 
     next() {

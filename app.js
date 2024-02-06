@@ -1,5 +1,5 @@
 const { shuffle } = require("lodash");
-import { $, getLSData, setLSData } from './modules/utils';
+import { $ } from './modules/utils';
 import Game from "./modules/Game";
 
 
@@ -20,14 +20,14 @@ const initGame = async () => {
         const userInput = $("form input");
 
         if (game.isGameDone()) {
-            alert(`Score total: ${game.score}`);
+            alert(`Game Over! Your score is ${game.score}`);
             return;
         }
 
         if (game.country.checkAns(userInput.value)) game.addScore();
 
-        if (game.score > getLSData("highScore")) {
-            setLSData("highScore", game.score);
+        if (game.score > localStorage.getItem("highScore")) {
+            localStorage.setItem("highScore", game.score);
             displayHighScore();
         }
 
@@ -42,7 +42,7 @@ const initGame = async () => {
 document.addEventListener("DOMContentLoaded", () => displayHighScore());
 
 const displayHighScore = () => {
-    const highScore = getLSData("highScore");
+    const highScore = localStorage.getItem("highScore");
     if (!highScore) return;
 
     $("#highscore h1").textContent = `Highscore: ${highScore}`;
